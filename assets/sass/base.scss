@@ -1,11 +1,220 @@
-h1 {
-    color: red;
+// ----------------------------------------
+// Mixins
+// ----------------------------------------
+@mixin circle {
+	border-radius: 100%;
 }
 
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
 body {
-    background-color: green;
+	background-color: #a2a2a2;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
 }
 
-p {
-    color: orange;
+.mission-control {
+	width: 668px;
+	height: 472px;
+	margin: 71px auto 0;
+	overflow: hidden;
+	background-color: #93B3AC;
+	box-shadow: 40px 40px 100px 0 #65524e;
 }
+
+.container {
+	width: 388px;
+	margin: auto;
+}
+
+.banner {
+	height: 31px;
+	position: relative;
+	padding: 0;
+	margin: 42px auto 2px;
+	background-color: #816a74;
+	border: 1px solid #805b6a;
+	border-radius: 1px;
+	b {
+		width: 120px;
+		margin: auto;
+		padding: 4px 5px 3px;
+		display: block;
+		position: relative;
+		top: 5px;
+		text-align: center;
+		color: #F15D5E;
+		font-size: 12px;
+		font-family: 'Courier New';
+		text-transform: uppercase;
+		text-shadow: 0 1px 1px #f1fde1;
+		line-height: 1;
+		// font-weight: normal;
+		background-color: #f2eac1;
+		border-radius: 1px;
+	}
+	i {
+		&:first-child {
+			&:before { left: 25px; }
+			&:after  { left: 80px; }
+		}
+		&:last-child {
+			&:before { right: 25px; }
+			&:after  { right: 80px; }
+		}
+		&:after,
+		&:before {
+			top: 5px;
+			width: 20px;
+			height: 20px;
+			content: " ";
+			position: absolute;
+			background-color: #eee8bd;
+			border: 2px solid #7fc5be;
+
+			@include circle;
+		}
+	}
+}
+
+
+// ----------------------------------------
+// Screens
+// ----------------------------------------
+.screens-container {
+	position: relative;
+	height: 130px;
+	width:  100%;
+	-webkit-perspective: 300px;
+	        perspective: 300px;
+}
+.screens {
+	width: 305px;
+	top: -13px;
+	left: 41px;
+	position: absolute;
+
+	border: 2px solid #716163;
+	background-color: #F15D5e;
+
+	-webkit-transform: rotateX(-45deg);
+	        transform: rotateX(-45deg);
+
+	.panel {
+		&:first-child,
+		&:last-child {
+			width: 33.5%;
+		}
+		width: 33%;
+		height: 178px;
+		float: left;
+		padding: 10px;
+	}
+	.screen {
+		height: 158px;
+	}
+	.terminal {
+		.screen {
+			border-top: 10px solid #716163;
+			background-color: #EEE8BD;
+		}
+	}
+	.orbital-path {
+		margin-left: 0;
+		margin-right: 0;
+		border-left: 2px solid #716163;
+		border-right: 2px solid #716163;
+		.screen {
+			border: 2px solid #716163;
+			border-radius: 4px;
+			background-color: #93B3AC;
+		}
+	}
+	.spacecraft-view {
+		.screen {
+			border: 2px solid #EEE8BD;
+			background-color: #716163;
+			position: relative;
+			overflow: hidden;
+		}
+		.planet {
+			bottom: -100px;
+			left: -55px;
+			width: 120px;
+			height: 170px;
+			position: absolute;
+			background-color: #93B3AC;
+			@include circle;
+		}
+	}
+}
+
+// ----------------------------------------
+// Windows
+// ----------------------------------------
+.windows {
+	width: 250px;
+	margin: 2px auto;
+	overflow: hidden;
+}
+.window {
+	width: 86px;
+	height: 72px;
+	float: left;
+	position: relative;
+	background-color: #EEE8BD;
+	border: 1px solid #fcf4c2;
+	&:first-child,
+	&:last-child {
+		.line {
+			&:nth-child(1) { width: 30px; bottom: 15px; left: 1px; }
+			&:nth-child(2) { width: 40px; bottom: 18px; left: 10px; }
+			&:nth-child(3) { width: 10px; bottom: 7px; left: 50px; }
+			&:nth-child(4) { width: 40px; bottom: 44px; left: 4px; }
+			&:nth-child(5) { width: 20px; bottom: 30px; left: 50px; }
+			&:nth-child(6) { width: 50px; bottom: 48px; left: 36px; }
+			&:nth-child(7) { width: 20px; bottom: 58px; left: 62px; }
+		}
+	}
+	&:nth-child(2) {
+		width: 66px;
+		margin: 0 5px;
+		.line {
+			&:nth-child(1) { width: 30px; bottom: 13px; left: -1px; }
+			&:nth-child(2) { width: 20px; bottom: 34px; left: 1px; }
+			&:nth-child(3) { width: 40px; bottom: 44px; left: 1px; }
+			&:nth-child(4) { width: 15px; bottom: 9px; left: 47px; }
+			&:nth-child(5) { width: 20px; bottom: 60px; left: 30px; }
+			&:nth-child(6) { width: 20px; bottom: 32px; left: 43px; }
+		}
+	}
+}
+.line {
+	height: 1px;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: #252632;
+
+	-webkit-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+}
+
+
+
+// ----------------------------------------
+// Helpers
+// ----------------------------------------
+.is-circle {
+	@include circle;
+}
+
+
